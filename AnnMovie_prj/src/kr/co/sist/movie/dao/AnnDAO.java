@@ -6,7 +6,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
+
+import kr.co.sist.menu.vo.MenuVO;
+import kr.co.sist.movie.vo.AddReviewVO;
+import kr.co.sist.movie.vo.DelReviewVO;
+import kr.co.sist.movie.vo.JoinVO;
+import kr.co.sist.movie.vo.MainVO;
+import kr.co.sist.movie.vo.ResInfoVO;
+import kr.co.sist.movie.vo.ReserveVO;
 
 public class AnnDAO {
 	private static AnnDAO a_dao;
@@ -29,8 +38,6 @@ public class AnnDAO {
 		Properties prop = new Properties();
  
 		try {
-			//경로는 설정해야 맛이지!!! 마스터변경
-			//어떻게쓰는거야??
 			File file = new File("경로설정ㅋㅋㅋㅋㅋ"); 
 
 			if (file.exists()) {
@@ -42,15 +49,50 @@ public class AnnDAO {
 			}
 
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}//end catch
 
 		return con;
-	}// getConnection	
+	}// getConnection	 
+	
+	public MainVO select_mainView() {
+		
+	}//select_mainView
+	
+	public boolean select_memberChk(LoginVO lv){
+		
+	}//select_memberChk
+	
+	public boolean select_overlapChk(String id){
+		
+	}//select_overlapChk
+	
+	public List<AddReviewVO> select_totalReview(){
+		
+	}//select_totalReview
+	
+	public ResInfoVO select_reserveInfo(){
+		
+	}//select_reserveInfo
+	
+	public void insert_reserve(ReserveVO rv) {
+		
+	}//insert_reserve
+	
+	public void insert_review(AddReviewVO arv) {
+		
+	}//insert_review
+	
+	public void insert_join(JoinVO jv) {
+		
+	}//insert_join
+	
+	public void delete_review(DelReviewVO drv) {
+		
+	}//delete_review
+	
 	
 	
 	
