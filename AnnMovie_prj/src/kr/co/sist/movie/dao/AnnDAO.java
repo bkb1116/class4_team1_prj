@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class AnnDAO {
 	private static AnnDAO a_dao;
-	//기준 수정
+	//기준 수정 마스터변경
 	public AnnDAO() {
 	}//AnnDAO
 
