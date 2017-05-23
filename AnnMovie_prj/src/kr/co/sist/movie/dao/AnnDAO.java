@@ -30,7 +30,7 @@ public class AnnDAO {
  
 		try {
 			//경로는 설정해야 맛이지!!! 마스터변경
-			File file = new File("경로설정ㅋㅋㅋㅋㅋ");
+			File file = new File("경로설정ㅋㅋㅋㅋㅋ"); 
 
 			if (file.exists()) {
 				prop.load(new FileInputStream(file));
