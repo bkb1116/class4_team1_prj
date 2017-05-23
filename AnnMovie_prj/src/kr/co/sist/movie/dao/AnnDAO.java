@@ -30,6 +30,7 @@ public class AnnDAO {
  
 		try {
 			//경로는 설정해야 맛이지!!! 마스터변경// 수근햄!
+			////////수그니햄 작업해보아ㅇ요
 			File file = new File("경로설정ㅋㅋㅋㅋㅋ"); 
 
 			if (file.exists()) {
