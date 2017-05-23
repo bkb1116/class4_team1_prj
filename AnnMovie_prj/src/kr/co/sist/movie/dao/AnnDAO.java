@@ -11,10 +11,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 
-import kr.co.sist.menu.vo.MenuVO;
 import kr.co.sist.movie.vo.AddReviewVO;
 import kr.co.sist.movie.vo.DelReviewVO;
 import kr.co.sist.movie.vo.JoinVO;
+import kr.co.sist.movie.vo.LoginVO;
 import kr.co.sist.movie.vo.MainVO;
 import kr.co.sist.movie.vo.ResInfoVO;
 import kr.co.sist.movie.vo.ReserveVO;
@@ -99,8 +99,35 @@ public class AnnDAO {
 		
 	}//select_mainView
 	
-	public boolean select_memberChk(LoginVO lv){
+	/*
+	public boolean select_memberChk(LoginVO lv) throws SQLException{
 		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+	
+		try {
+		// 1.
+		// 2.
+			con=getConnection();
+		// 3.
+			String select_mem=" ";
+			pstmt=con.prepareStatement(select_mem);
+		// 4.
+			pstmt.setString(1, lv.getId());
+			pstmt.setString(2, lv.getPassword());
+
+			pstmt.executeUpdate();
+		} finally {
+		// 5.
+			
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+
+			if (con != null) {
+				con.close();
+			} // end if
+		}
 	}//select_memberChk
 	
 	public boolean select_overlapChk(String id){
@@ -130,5 +157,6 @@ public class AnnDAO {
 	public void delete_review(DelReviewVO drv) {
 		
 	}//delete_review
+	*/
 	
 }//class
