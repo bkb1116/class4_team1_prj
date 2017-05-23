@@ -33,7 +33,7 @@ public class AnnDAO {
 			File file = new File("경로설정ㅋㅋㅋㅋㅋ"); 
 
 			if (file.exists()) {
-				prop.load(new FileInputStream(file));
+				prop.load(new FileInputStream(file)); 
 				String driver = prop.getProperty("driver");
 				String url = prop.getProperty("url");
 				String id = prop.getProperty("dboid");
