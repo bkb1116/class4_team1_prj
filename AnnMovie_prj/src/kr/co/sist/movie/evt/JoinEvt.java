@@ -13,6 +13,7 @@ public class JoinEvt extends WindowAdapter implements ActionListener {
 	public JoinEvt(JoinView jv) {
 		this.jv=jv;
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
