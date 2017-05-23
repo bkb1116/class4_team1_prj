@@ -27,9 +27,10 @@ public class AnnDAO {
 		Connection con = null;
 
 		Properties prop = new Properties();
-
+ 
 		try {
-			File file = new File("경로설정");
+			//경로는 설정해야 맛이지!!!
+			File file = new File("경로설정ㅋㅋㅋㅋㅋ");
 
 			if (file.exists()) {
 				prop.load(new FileInputStream(file));
