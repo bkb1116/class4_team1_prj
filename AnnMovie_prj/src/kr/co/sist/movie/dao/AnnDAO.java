@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -57,7 +59,43 @@ public class AnnDAO {
 		return con;
 	}// getConnection	 
 	
-	public MainVO select_mainView() {
+	////////////////////// 메인화면 정보(이미지, 평점, 영화정보) //////////////////////
+	public void select_mainView() throws SQLException{
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			// 1.
+			// 2.
+			con = getConnection();
+			// 3.
+			String select_main = "select movie_Img, movie_Info, movie_score from ann_movie where 선택한 영화";
+			pstmt = con.prepareStatement(select_main);
+			// 4.
+			rs = pstmt.executeQuery();
+
+			MainVO mvo = null;
+				mvo = new MainVO();
+				mvo.setMovieImg(rs.getString("movie_Img"));
+				mvo.setMovieInfo(rs.getString("movie_Info"));
+				mvo.setAvgScore(rs.getString("movie_score"));
+
+		} finally {
+			// 5.
+			if (rs != null) {
+				rs.close();
+			} // end if
+
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+
+			if (con != null) {
+				con.close();
+			} // end if
+		}//end catch
 		
 	}//select_mainView
 	
@@ -92,8 +130,5 @@ public class AnnDAO {
 	public void delete_review(DelReviewVO drv) {
 		
 	}//delete_review
-	
-	
-	
 	
 }//class

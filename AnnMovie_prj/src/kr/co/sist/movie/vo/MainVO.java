@@ -2,7 +2,8 @@ package kr.co.sist.movie.vo;
 
 public class MainVO {
 	private String movieImg, movieInfo, avgScore;
-
+	
+	
 	public String getMovieImg() {
 		return movieImg;
 	}
