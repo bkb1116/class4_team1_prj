@@ -26,7 +26,7 @@ public class AnnDAO {
 	private Connection getConnection() throws SQLException {
 		Connection con = null;
 
-		Properties prop = new Properties();
+		Properties prop = new Properties();//!!
  
 		try {
 			//경로는 설정해야 맛이지!!! 마스터변경
