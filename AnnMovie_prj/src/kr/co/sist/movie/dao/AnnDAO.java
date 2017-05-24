@@ -21,7 +21,7 @@ import kr.co.sist.movie.vo.ReserveVO;
 
 public class AnnDAO {
 	private static AnnDAO a_dao;
-	//기준 수정 마스터변경
+	
 	public AnnDAO() {
 	}//AnnDAO
 
@@ -33,13 +33,12 @@ public class AnnDAO {
 		
 		return a_dao;
 	}//getInstance
-///////////////test 1/////////////////////
-///////////////test 1/////////////////////
-///////////////test 1/////////////////////
-///////////////test 1/////////////////////
-///////////////test 1///////////////////// 
 	
-	
+	/**
+	 * 커넥션 작업
+	 * @return
+	 * @throws SQLException
+	 */
 	private Connection getConnection() throws SQLException {
 		Connection con = null;
 
@@ -65,7 +64,10 @@ public class AnnDAO {
 		return con;
 	}// getConnection	 
 	
-	////////////////////// 메인화면 정보(이미지, 평점, 영화정보) //////////////////////
+	/**
+	 * 메인화면 정보(이미지, 평점, 영화정보)
+	 * @throws SQLException
+	 */
 	public void select_mainView() throws SQLException{
 
 		Connection con = null;
@@ -77,7 +79,7 @@ public class AnnDAO {
 			// 2.
 			con = getConnection();
 			// 3.
-			String select_main = "select movie_Img, movie_Info, movie_score from ann_movie where 선택한 영화";
+			String select_main = "select movie_Img, movie_Info, movie_score from ann_movie where movie_title='임금님의 사건수첩'";
 			pstmt = con.prepareStatement(select_main);
 			// 4.
 			rs = pstmt.executeQuery();
@@ -105,7 +107,7 @@ public class AnnDAO {
 		
 	}//select_mainView
 	
-	/*
+	
 	public boolean select_memberChk(LoginVO lv) throws SQLException{
 		
 		Connection con = null;
@@ -134,35 +136,97 @@ public class AnnDAO {
 				con.close();
 			} // end if
 		}
+		return false;
 	}//select_memberChk
 	
+	/**
+	 * @param id
+	 * @return
+	 */
 	public boolean select_overlapChk(String id){
+		return false;
 		
 	}//select_overlapChk
 	
+	/**
+	 * @return
+	 */
 	public List<AddReviewVO> select_totalReview(){
+		return null;
 		
 	}//select_totalReview
 	
+	/**
+	 * 예매정보 조회(고객용)
+	 * @return
+	 */
 	public ResInfoVO select_reserveInfo(){
+		return null;
 		
 	}//select_reserveInfo
 	
+	/**
+	 * 예매하기
+	 * @param rv
+	 */
 	public void insert_reserve(ReserveVO rv) {
 		
 	}//insert_reserve
 	
-	public void insert_review(AddReviewVO arv) {
-		
+	/**
+	 * DB에 후기 추가(평점, 리뷰, 아이디)
+	 * @param arv
+	 * @throws SQLException 
+	 */
+	public void insert_review(AddReviewVO arv) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = getConnection();
+			
+			String select_main = "insert into(컬럼명) values(값들) ";
+			pstmt = con.prepareStatement(select_main);
+			
+			rs = pstmt.executeQuery();
+
+			MainVO mvo = null;
+				mvo = new MainVO();
+				mvo.setMovieImg(rs.getString("movieReview"));
+				mvo.setMovieInfo(rs.getString("id"));
+
+		} finally {
+			// 5.
+			if (rs != null) {
+				rs.close();
+			} // end if
+
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+
+			if (con != null) {
+				con.close();
+			} // end if
+		}//end catch
 	}//insert_review
 	
+	/**
+	 * 회원가입(아이디, 패스워드, 이름, 주민번호, 전화번호, 이메일)
+	 * @param jv
+	 */
 	public void insert_join(JoinVO jv) {
 		
 	}//insert_join
 	
+	/**
+	 * 후기삭제(리뷰, 아이디)
+	 * @param drv
+	 */
 	public void delete_review(DelReviewVO drv) {
 		
 	}//delete_review
-	*/
+	
 	
 }//class
