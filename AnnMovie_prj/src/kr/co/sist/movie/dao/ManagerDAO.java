@@ -171,6 +171,7 @@ public class ManagerDAO {
 
 	/**
 	 * 좌석 정보 조회하는 method
+	 * 좌석이 등록 안 된 경우 0으로 조회됨
 	 * @return seat_info
 	 * @throws SQLException
 	 */
@@ -187,14 +188,14 @@ public class ManagerDAO {
 			// 2.커넥션 얻기
 			con = getConnection();
 			// 3.쿼리문 생성 객체 얻기
-			String selectReserve = "";
+			String selectReserve = "select seat_num from ANN_SEAT";
 			pstmt = con.prepareStatement(selectReserve);
 			// 4.쿼리문 실행 후 객체 얻기
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
-				// 배열에 담기
-				// result[i] = rs.getInt("seat_num1");
+				// 배열에 담기 
+				result[rs.getInt("seat_num")] = rs.getInt("seat_num");
 			} // end while
 
 		} finally {
@@ -220,13 +221,23 @@ public class ManagerDAO {
 		ManagerDAO md = new ManagerDAO();
 		try {
 			// select_reserveNot method
-			// List<UserResNotVO> list = md.select_reserveNot();
-			// System.out.println(list);
+//			 List<UserResNotVO> list = md.select_reserveNot();
+//			 System.out.println(list);
 
 			// select_seatNum method
-			String seat_num = md.select_seatNum("SEAT_00003");
-			System.out.println(seat_num);
+//			String seat_num = md.select_seatNum("SEAT_00003");
+//			System.out.println(seat_num);
 
+			//select_seatInfo method
+			int[] arr= md.select_seatInfo();
+			for (int i = 0; i < arr.length; i++) {
+				if(arr[i]!=0){
+					System.out.println(arr[i]+" ");
+				}
+			}// for
+			
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} // catch
