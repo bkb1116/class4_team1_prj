@@ -39,6 +39,8 @@ public class UserResYesVO {
 	public String toString() {
 		return "UserResYesVO [id=" + id + ", name=" + name + ", seatNum1=" + seatNum1 + ", seatNum2=" + seatNum2 + "]";
 	}
+
+	
 	
 	
 }
