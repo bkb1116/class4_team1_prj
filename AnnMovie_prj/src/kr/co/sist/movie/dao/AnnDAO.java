@@ -33,6 +33,12 @@ public class AnnDAO {
 		
 		return a_dao;
 	}//getInstance
+///////////////test 1/////////////////////
+///////////////test 1/////////////////////
+///////////////test 1/////////////////////
+///////////////test 1/////////////////////
+///////////////test 1/////////////////////
+	
 	
 	private Connection getConnection() throws SQLException {
 		Connection con = null;
@@ -40,7 +46,7 @@ public class AnnDAO {
 		Properties prop = new Properties();
  
 		try {
-			File file = new File("경로설정ㅋㅋㅋㅋㅋ"); 
+			File file = new File("C:/Users/sist/git/class4_team1_prj/AnnMovie_prj/src/kr/co/sist/movie/dao/AnnMovie_db.properties"); 
 
 			if (file.exists()) {
 				prop.load(new FileInputStream(file)); 
