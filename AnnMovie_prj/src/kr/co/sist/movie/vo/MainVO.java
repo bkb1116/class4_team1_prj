@@ -4,7 +4,6 @@ public class MainVO {
 	private String movieImg, movieInfo; 
 	private int avgScore;
 	
-	
 	public String getMovieImg() {
 		return movieImg;
 	}
@@ -33,8 +32,6 @@ public class MainVO {
 	public String toString() {
 		return "MainVO [movieImg=" + movieImg + ", movieInfo=" + movieInfo + ", avgScore=" + avgScore + "]";
 	}
-	
-	
-	
+
 	
 }

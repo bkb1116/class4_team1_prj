@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +31,7 @@ public class AnnDAO {
 		if(a_dao == null){
 			a_dao = new AnnDAO();
 		}//end if
-		
+		 
 		return a_dao;
 	}//getInstance
 	
@@ -53,6 +54,13 @@ public class AnnDAO {
 				String url = prop.getProperty("url");
 				String id = prop.getProperty("dboid");
 				String pass = prop.getProperty("dbopwd");
+				
+				try {// 드라이버로딩
+					Class.forName(driver);
+					con = DriverManager.getConnection(url, id, pass);
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} // catch
 			}
 
 		} catch (FileNotFoundException e1) {
@@ -70,7 +78,9 @@ public class AnnDAO {
 	 */
 	public MainVO select_mainView() throws SQLException{
 
-		MainVO mvo = new MainVO();
+		MainVO mvo= new MainVO();
+
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -188,12 +198,14 @@ public class AnnDAO {
 			// 2.
 				con=getConnection();
 			// 3.
-				String insertOrdering="insert into ann_review(movie_avg, review, user_id ) values(?,?,?)";
+				String insertOrdering="insert into ann_review(review_code, user_id, movie_code, notice, review, movie_avg, review_date )"
+						+"values('REV_000016', 'kim', (select movie_code from ann_movie where movie_title='임금님의 사건수첩'), 'N', '쿨하게 보겠어용', 3, sysdate );";
 				pstmt=con.prepareStatement(insertOrdering);
 			// 4.
-				pstmt.setString(1, arv.getMovieScore());
+				pstmt.setString(1, arv.getId());
+//				pstmt.setString(2,"ANN_000001");//무비코드 조인해야하나...
 				pstmt.setString(2, arv.getMovieReview());
-				pstmt.setString(3, arv.getId());
+				pstmt.setInt(3, arv.getMovieScore());
 
 				pstmt.executeUpdate();
 			} finally {
@@ -259,12 +271,20 @@ public class AnnDAO {
 	
 	public static void main(String[] args) {
 		AnnDAO ad=new AnnDAO();
-		
+	
 		try {
-			MainVO mv = ad.select_mainView();
-			System.out.println(mv);
+			AnnDAO ado=new AnnDAO();
+			AddReviewVO arv=new AddReviewVO();
+			
+			arv.setId("쿨규임당");
+			
+			arv.setMovieReview("쿨하게 보겠어용");
+			arv.setMovieScore(3);
+			
+			ado.insert_review(arv);
+			
+			System.out.println("chkq");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
