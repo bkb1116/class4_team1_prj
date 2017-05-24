@@ -3,6 +3,21 @@ package kr.co.sist.movie.vo;
 public class UserSearchVO {
 	private String name, phone, email;
 
+//	public UserSearchVO() {
+//
+//	}//기본 생성자
+//	
+//	
+//
+//	public UserSearchVO(String name, String phone, String email) {
+//		super();
+//		this.name = name;
+//		this.phone = phone;
+//		this.email = email;
+//	}
+//
+
+
 	public String getName() {
 		return name;
 	}
@@ -25,6 +40,13 @@ public class UserSearchVO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "UserSearchVO [name=" + name + ", phone=" + phone + ", email=" + email + "]";
 	}
 	
 	
