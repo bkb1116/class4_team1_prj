@@ -34,6 +34,12 @@ public class UserResYesVO {
 	public void setSeatNum2(String seatNum2) {
 		this.seatNum2 = seatNum2;
 	}
+
+	@Override
+	public String toString() {
+		return "UserResYesVO [id=" + id + ", name=" + name + ", seatNum1=" + seatNum1 + ", seatNum2=" + seatNum2 + "]";
+	}
+	
 	
 	
 }

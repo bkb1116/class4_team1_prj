@@ -1,7 +1,8 @@
 package kr.co.sist.movie.vo;
 
 public class UserResNotVO {
-	private String id, name, seatQuan;
+	private String id, name;
+	int seatQuan;
 
 	public String getId() {
 		return id;
@@ -19,13 +20,17 @@ public class UserResNotVO {
 		this.name = name;
 	}
 
-	public String getSeatQuan() {
+	public int getSeatQuan() {
 		return seatQuan;
 	}
 
-	public void setSeatQuan(String seatQuan) {
+	public void setSeatQuan(int seatQuan) {
 		this.seatQuan = seatQuan;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "UserResNotVO [id=" + id + ", name=" + name + ", seatQuan=" + seatQuan + "]";
+	}
 	
 }
