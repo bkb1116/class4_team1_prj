@@ -5,7 +5,7 @@ import kr.co.sist.movie.view.MainView;
 public class AnnMovie {
     
 	public static void main(String[] args) {
-		new MainView(); // 货肺 棵非澜!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   
+		new MainView(); // 货肺 棵非澜
 	}  
 
 }
