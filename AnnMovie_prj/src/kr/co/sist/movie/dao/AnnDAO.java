@@ -68,8 +68,9 @@ public class AnnDAO {
 	 * 메인화면 정보(이미지, 평점, 영화정보)
 	 * @throws SQLException
 	 */
-	public void select_mainView() throws SQLException{
+	public MainVO select_mainView() throws SQLException{
 
+		MainVO mvo = new MainVO();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -79,17 +80,16 @@ public class AnnDAO {
 			// 2.
 			con = getConnection();
 			// 3.
-			String select_main = "select movie_Img, movie_Info, movie_score from ann_movie where movie_title='임금님의 사건수첩'";
+			String select_main = "select * from ann_movie where movie_code='ANN_000001'";
 			pstmt = con.prepareStatement(select_main);
 			// 4.
 			rs = pstmt.executeQuery();
 
-			MainVO mvo = null;
-				mvo = new MainVO();
-				mvo.setMovieImg(rs.getString("movie_Img"));
-				mvo.setMovieInfo(rs.getString("movie_Info"));
-				mvo.setAvgScore(rs.getString("movie_score"));
-
+			rs.next();
+			mvo.setMovieImg(rs.getString("movie_Img"));
+			mvo.setMovieInfo(rs.getString("movie_Info"));
+			mvo.setAvgScore(rs.getInt("movie_score"));
+			
 		} finally {
 			// 5.
 			if (rs != null) {
@@ -105,6 +105,7 @@ public class AnnDAO {
 			} // end if
 		}//end catch
 		
+		return mvo;
 	}//select_mainView
 	
 	
@@ -179,29 +180,64 @@ public class AnnDAO {
 	 * @throws SQLException 
 	 */
 	public void insert_review(AddReviewVO arv) throws SQLException {
+		
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+			// 1.
+			// 2.
+				con=getConnection();
+			// 3.
+				String insertOrdering="insert into ann_review(movie_avg, review, user_id ) values(?,?,?)";
+				pstmt=con.prepareStatement(insertOrdering);
+			// 4.
+				pstmt.setString(1, arv.getMovieScore());
+				pstmt.setString(2, arv.getMovieReview());
+				pstmt.setString(3, arv.getId());
+
+				pstmt.executeUpdate();
+			} finally {
+			// 5.
+				if (pstmt != null) {
+					pstmt.close();
+				} // end if
+
+				if (con != null) {
+					con.close();
+				} // end if
+			}//end finally
+			
+	}//insert_review
+	
+	/**
+	 * 회원가입(id, 이름, 비밀번호, 주민번호, 전화번호, 이메일, 성별, 가입일)
+	 * @param jv
+	 * @throws SQLException 
+	 */
+	public void insert_join(JoinVO jv) throws SQLException {
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
 		try {
-			con = getConnection();
-			
-			String select_main = "insert into(컬럼명) values(값들) ";
-			pstmt = con.prepareStatement(select_main);
-			
-			rs = pstmt.executeQuery();
+		// 1.
+		// 2.
+			con=getConnection();
+		// 3.
+			String insert_join="insert into ann_customer(user_id, user_name, user_pw, user_ssn, user_tell, user_email, user_gender, user_date ) "
+					+ "values(?,?,?,?,?,?,?,sysdate)";
+			pstmt=con.prepareStatement(insert_join);
+		// 4.
+			pstmt.setString(1, jv.getId());
+			pstmt.setString(2, jv.getName());
+			pstmt.setString(3, jv.getPasswd());
+			pstmt.setString(4, jv.getSsn());
+			pstmt.setString(5, jv.getPhone());
+			pstmt.setString(6, jv.getEmail());
+			pstmt.setString(7, jv.getGender());
 
-			MainVO mvo = null;
-				mvo = new MainVO();
-				mvo.setMovieImg(rs.getString("movieReview"));
-				mvo.setMovieInfo(rs.getString("id"));
-
+			pstmt.executeUpdate();
 		} finally {
-			// 5.
-			if (rs != null) {
-				rs.close();
-			} // end if
-
+		// 5.
 			if (pstmt != null) {
 				pstmt.close();
 			} // end if
@@ -209,14 +245,7 @@ public class AnnDAO {
 			if (con != null) {
 				con.close();
 			} // end if
-		}//end catch
-	}//insert_review
-	
-	/**
-	 * 회원가입(아이디, 패스워드, 이름, 주민번호, 전화번호, 이메일)
-	 * @param jv
-	 */
-	public void insert_join(JoinVO jv) {
+		}//end finally
 		
 	}//insert_join
 	
@@ -228,5 +257,17 @@ public class AnnDAO {
 		
 	}//delete_review
 	
+	public static void main(String[] args) {
+		AnnDAO ad=new AnnDAO();
+		
+		try {
+			MainVO mv = ad.select_mainView();
+			System.out.println(mv);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 }//class

@@ -1,7 +1,7 @@
 package kr.co.sist.movie.vo;
 
 public class JoinVO {
-	private String id, passwd, name, ssn, phone, email;
+	private String id, passwd, name, ssn, phone, email, gender;
 
 	public String getId() {
 		return id;
@@ -49,6 +49,14 @@ public class JoinVO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
 	

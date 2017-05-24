@@ -5,5 +5,5 @@ import kr.co.sist.movie.view.MainView;
 public class AnnMovie {
 	public static void main(String[] args) {
 		new MainView(); 
-	}// main  
+	}// main
 }// class
