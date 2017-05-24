@@ -43,7 +43,7 @@ public class AnnDAO {
 	private Connection getConnection() throws SQLException {
 		Connection con = null;
 
-		Properties prop = new Properties();
+		Properties prop = new Properties(); 
   
 		try { 
 			File file = new File("C:/Users/sist/git/class4_team1_prj/AnnMovie_prj/src/kr/co/sist/movie/dao/AnnMovie_db.properties"); 
