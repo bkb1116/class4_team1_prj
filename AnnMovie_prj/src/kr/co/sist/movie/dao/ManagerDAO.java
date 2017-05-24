@@ -67,7 +67,7 @@ public class ManagerDAO {
 		Connection con = null;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
-		try {
+		try {  
 			// 1.드라이버로딩
 			// 2.커넥션 얻기
 			con = getConnection();
