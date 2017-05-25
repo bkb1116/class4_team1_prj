@@ -1,13 +1,14 @@
 package kr.co.sist.movie.vo;
 
 public class AddReviewVO {
-	private String movieScore, movieReview, id;
-
-	public String getMovieScore() {
+	private String movieReview, id;
+	private int movieScore;
+	
+	public int getMovieScore() {
 		return movieScore;
 	}
 
-	public void setMovieScore(String movieScore) {
+	public void setMovieScore(int movieScore) {
 		this.movieScore = movieScore;
 	}
 
