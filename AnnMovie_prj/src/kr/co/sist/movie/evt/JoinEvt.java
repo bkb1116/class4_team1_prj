@@ -15,7 +15,7 @@ import kr.co.sist.movie.vo.JoinVO;
 
 public class JoinEvt extends WindowAdapter implements ActionListener {
 
-	private JoinView jv;
+	private JoinView jv; 
 	private boolean flag = false;
 
 	public JoinEvt(JoinView jv) {
