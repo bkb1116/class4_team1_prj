@@ -29,7 +29,7 @@ public class MainEvt extends WindowAdapter implements ActionListener, ItemListen
 			new JoinView();
 		
 		}
-			
+			//DIRTY_WORKTREE	AnnMovie_prj/src/kr/co/sist/movie/evt/MainEvt.java
 	}
 
-}
+}  
