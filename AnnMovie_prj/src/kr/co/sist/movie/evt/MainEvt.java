@@ -6,6 +6,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 
+import kr.co.sist.movie.view.JoinView;
 import kr.co.sist.movie.view.MainView;
 
 public class MainEvt extends WindowAdapter implements ActionListener, ItemListener {
@@ -23,9 +24,12 @@ public class MainEvt extends WindowAdapter implements ActionListener, ItemListen
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+	public void actionPerformed(ActionEvent ae) {
+		if(ae.getSource()==mv.getJbt_join()){
+			new JoinView();
+		
+		}
+			
 	}
 
 }

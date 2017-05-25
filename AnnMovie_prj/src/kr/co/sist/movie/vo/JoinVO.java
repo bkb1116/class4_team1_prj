@@ -1,7 +1,15 @@
 package kr.co.sist.movie.vo;
 
 public class JoinVO {
-	private String id, passwd, name, ssn, phone, email, gender;
+	private String id, passwd, name, ssn, phone, email, gender,addr;
+
+	public String getAddr() {
+		return addr;
+	}
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
 
 	public String getId() {
 		return id;

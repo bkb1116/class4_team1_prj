@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import kr.co.sist.movie.evt.JoinEvt;
 import kr.co.sist.movie.evt.MainEvt;
 
 public class MainView extends JFrame{
@@ -22,6 +23,7 @@ public class MainView extends JFrame{
    private JButton jbt_reserve,jbt_review,jbt_login,Jbt_reserveChk,jbt_join,jbt_manager;
    private JScrollPane jsp_review;
    private Font font;
+  
    public MainView(){
       super("영화예매 페이지");
       //라벨 
@@ -68,8 +70,14 @@ public class MainView extends JFrame{
       //후기
       add(jtf_Review);
       add(jsp_review);
+   
+      
       //이벤트 등록
       MainEvt me=new MainEvt(this);
+      jbt_join.addActionListener(me);
+      
+      
+      
       //콤보박스에 1~5의숫자 넣어주기
       jcb_grade.addItem("평점주기");
       jcb_grade.addItem("1");
@@ -111,8 +119,234 @@ public class MainView extends JFrame{
       
    }//end MainPage
 
+   
+   
+   
+   public JList<String> getJl_review() {
+	return jl_review;
+}
 
-   public static void main(String[] args) {
+
+
+
+public void setJl_review(JList<String> jl_review) {
+	this.jl_review = jl_review;
+}
+
+
+
+
+public JComboBox<String> getJcb_grade() {
+	return jcb_grade;
+}
+
+
+
+
+public void setJcb_grade(JComboBox<String> jcb_grade) {
+	this.jcb_grade = jcb_grade;
+}
+
+
+
+
+public JComboBox<String> getJcb_peopleNum() {
+	return jcb_peopleNum;
+}
+
+
+
+
+public void setJcb_peopleNum(JComboBox<String> jcb_peopleNum) {
+	this.jcb_peopleNum = jcb_peopleNum;
+}
+
+
+
+
+public JLabel getJlb_img() {
+	return jlb_img;
+}
+
+
+
+
+public void setJlb_img(JLabel jlb_img) {
+	this.jlb_img = jlb_img;
+}
+
+
+
+
+public JLabel getJlb_avg() {
+	return jlb_avg;
+}
+
+
+
+
+public void setJlb_avg(JLabel jlb_avg) {
+	this.jlb_avg = jlb_avg;
+}
+
+
+
+
+public JLabel getJlb_peopleNum() {
+	return jlb_peopleNum;
+}
+
+
+
+
+public void setJlb_peopleNum(JLabel jlb_peopleNum) {
+	this.jlb_peopleNum = jlb_peopleNum;
+}
+
+
+
+
+public JLabel getJlb_avg2() {
+	return jlb_avg2;
+}
+
+
+
+
+public void setJlb_avg2(JLabel jlb_avg2) {
+	this.jlb_avg2 = jlb_avg2;
+}
+
+
+
+
+public JTextField getJtf_Review() {
+	return jtf_Review;
+}
+
+
+
+
+public void setJtf_Review(JTextField jtf_Review) {
+	this.jtf_Review = jtf_Review;
+}
+
+
+
+
+public JButton getJbt_reserve() {
+	return jbt_reserve;
+}
+
+
+
+
+public void setJbt_reserve(JButton jbt_reserve) {
+	this.jbt_reserve = jbt_reserve;
+}
+
+
+
+
+public JButton getJbt_review() {
+	return jbt_review;
+}
+
+
+
+
+public void setJbt_review(JButton jbt_review) {
+	this.jbt_review = jbt_review;
+}
+
+
+
+
+public JButton getJbt_login() {
+	return jbt_login;
+}
+
+
+
+
+public void setJbt_login(JButton jbt_login) {
+	this.jbt_login = jbt_login;
+}
+
+
+
+
+public JButton getJbt_reserveChk() {
+	return Jbt_reserveChk;
+}
+
+
+
+
+public void setJbt_reserveChk(JButton jbt_reserveChk) {
+	Jbt_reserveChk = jbt_reserveChk;
+}
+
+
+
+
+public JButton getJbt_join() {
+	return jbt_join;
+}
+
+
+
+
+public void setJbt_join(JButton jbt_join) {
+	this.jbt_join = jbt_join;
+}
+
+
+
+
+public JButton getJbt_manager() {
+	return jbt_manager;
+}
+
+
+
+
+public void setJbt_manager(JButton jbt_manager) {
+	this.jbt_manager = jbt_manager;
+}
+
+
+
+
+public JScrollPane getJsp_review() {
+	return jsp_review;
+}
+
+
+
+
+public void setJsp_review(JScrollPane jsp_review) {
+	this.jsp_review = jsp_review;
+}
+
+
+
+
+public Font getFont() {
+	return font;
+}
+
+
+
+
+public void setFont(Font font) {
+	this.font = font;
+}
+
+
+
+
+public static void main(String[] args) {
       new MainView();
    }//main
 
