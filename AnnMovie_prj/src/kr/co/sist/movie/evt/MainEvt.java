@@ -55,12 +55,17 @@ public class MainEvt extends WindowAdapter implements ActionListener, ItemListen
 	 * 후기남기기 클릭시 이벤트 처리
 	 */
 	public void addReview(){
-		AddReviewVO arvo;
+		AddReviewVO arvo = new AddReviewVO();
 		
 		id=lv.getJtf_id().getText();
 		//String menu= maf.getJtfMenu().getText();//메뉴명
 		String movie_review=mv.getJtf_Review().getText();
 		String movie_score=(String) mv.getJcb_grade().getSelectedItem();
+		
+		arvo.setId(id);
+		arvo.setMovieReview(movie_review);
+		arvo.setMovieScore(movie_score);
+		
 		
 	}//addReview
 	
