@@ -90,7 +90,7 @@ public class AnnDAO {
 			mvo = new MainVO();
 			mvo.setMovieImg(rs.getString("movie_Img"));
 			mvo.setMovieInfo(rs.getString("movie_Info"));
-			mvo.setAvgScore(rs.getString("movie_score"));
+			mvo.setAvgScore(rs.getInt("movie_score"));
 
 		} finally {
 			// 5.
