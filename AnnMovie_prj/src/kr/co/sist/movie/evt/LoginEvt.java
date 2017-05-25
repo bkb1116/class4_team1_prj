@@ -15,9 +15,10 @@ public class LoginEvt extends WindowAdapter implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+	public void actionPerformed(ActionEvent ae) {
+		if(ae.getSource()==lv.getJbt_login()){
+			System.out.println("ddd");
+		}
 	}
 
 }
