@@ -332,7 +332,7 @@ public class AnnDAO {
 				con=getConnection();
 			// 3.
 				String insertOrdering="insert into ann_review(review_code, user_id, movie_code, notice, review, movie_avg, review_date )"
-						+"values('REV_000016', 'kim', (select movie_code from ann_movie where movie_title='ÀÓ±Ý´ÔÀÇ »ç°Ç¼öÃ¸'), 'N', 'ÄðÇÏ°Ô º¸°Ú¾î¿ë', 3, sysdate );";
+						+"values('REV_000016', ?, (select movie_code from ann_movie where movie_title='ÀÓ±Ý´ÔÀÇ »ç°Ç¼öÃ¸'), 'N', ?, ?, sysdate );";
 				pstmt=con.prepareStatement(insertOrdering);
 			// 4.
 				pstmt.setString(1, arv.getId());
@@ -341,6 +341,7 @@ public class AnnDAO {
 				pstmt.setString(3, arv.getMovieScore());
 
 				pstmt.executeUpdate();
+				System.out.println("¿©±âµµ");
 			} finally {
 			// 5.
 				if (pstmt != null) {
@@ -429,22 +430,16 @@ public class AnnDAO {
 	}//delete_review
 	
 	public static void main(String[] args) {
-		AnnDAO ad=new AnnDAO();
-	
-		try {
-			AnnDAO ado=new AnnDAO();
-			DelReviewVO drv=new DelReviewVO();
-			
-			drv.setId("cool");
-			drv.setMovieReview("¿ì¿Õ¤»±»");
-			
-			ado.delete_review(drv);
-			
-			System.out.println("chkq");
-		} catch (SQLException e) { 
-			e.printStackTrace();
-		}
-		
-	}
+	      AnnDAO ad = new AnnDAO();
+	      LoginVO lv = new LoginVO();
+	      lv.setId("kim");
+	      lv.setPassword("1234111");
+
+	      try {
+	         System.out.println(ad.select_memberChk(lv));
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }
+	   }// main
 	
 }//class

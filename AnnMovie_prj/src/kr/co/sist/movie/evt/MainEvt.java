@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
+import java.sql.SQLException;
 
 import kr.co.sist.movie.dao.AnnDAO;
 import kr.co.sist.movie.view.JoinView;
@@ -53,20 +54,21 @@ public class MainEvt extends WindowAdapter implements ActionListener, ItemListen
 	
 	/**
 	 * 후기남기기 클릭시 이벤트 처리
+	 * @throws SQLException 
 	 */
-	public void addReview(){
+	public void addReview() throws SQLException{
 		AddReviewVO arvo = new AddReviewVO();
 		
-		id=lv.getJtf_id().getText();
+//		id=lv.getJtf_id().getText();
 		//String menu= maf.getJtfMenu().getText();//메뉴명
 		String movie_review=mv.getJtf_Review().getText();
 		String movie_score=(String) mv.getJcb_grade().getSelectedItem();
-		
-		arvo.setId(id);
+		arvo.setId("kim");
 		arvo.setMovieReview(movie_review);
 		arvo.setMovieScore(movie_score);
+		a_dao.insert_review(arvo);
 		
-		
+		System.out.println("찍힘");
 	}//addReview
 	
 	/**
@@ -103,7 +105,12 @@ public class MainEvt extends WindowAdapter implements ActionListener, ItemListen
 		}
 		
 		if(e.getSource()==mv.getJbt_review()){
-			addReview();
+			try {
+				addReview();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 		if(e.getSource()==mv.getJbt_manager()){
