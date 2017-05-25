@@ -130,6 +130,10 @@ public class ManagerView extends JFrame {
 
 		// 이벤트 등록
 		ManagerEvt me=new ManagerEvt(this);
+		jbt_noticeRegis.addActionListener(me);
+		jbt_insert.addActionListener(me);
+		jbt_img.addActionListener(me);
+		
 
 		// 크기설정
 		jt_seat.getTableHeader().setReorderingAllowed(false);
@@ -504,11 +508,9 @@ public class ManagerView extends JFrame {
 	}
 
 
-
 	public void setJt_seat(JTable jt_seat) {
 		this.jt_seat = jt_seat;
 	}
-
 
 
 	public Font getFont() {

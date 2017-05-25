@@ -7,16 +7,6 @@ public class MovieRegisVO {
       return movieName;
    }
 
-
-   public MovieRegisVO(String movieName, String movieInfo, String movieImg, String movieDate) {
-      super();
-      this.movieName = movieName;
-      this.movieInfo = movieInfo;
-      this.movieImg = movieImg;
-      this.movieDate = movieDate;
-   }
-
-
    public void setMovieName(String movieName) {
       this.movieName = movieName;
    }

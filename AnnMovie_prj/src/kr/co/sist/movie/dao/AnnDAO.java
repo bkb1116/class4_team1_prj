@@ -47,7 +47,7 @@ public class AnnDAO {
       Properties prop = new Properties(); 
   
       try { 
-         File file = new File("C:/dev/AnnMovie/class4_team1_prj/AnnMovie_prj/src/kr/co/sist/movie/dao/AnnMovie_db.properties"); 
+         File file = new File("C:/dev/AnnMovie_prj/class4_team1_prj/AnnMovie_prj/src/kr/co/sist/movie/dao/AnnMovie_db.properties"); 
 
          if (file.exists()) {
             prop.load(new FileInputStream(file)); 
@@ -144,8 +144,9 @@ public class AnnDAO {
             String user_id = lv.getId();
             String user_pw = lv.getPassword();
 
-            String select_main = "select user_id,user_pw from ann_customer" + " where user_id='" + user_id
-                  + "' and user_pw='" + user_pw + "'";
+            String select_main = "select user_id,user_pw from ann_customer" 
+            		+ " where user_id='" + user_id
+                    + "' and user_pw='" + user_pw + "'";
             pstmt = con.prepareStatement(select_main);
             // 4.
             rs = pstmt.executeQuery();
