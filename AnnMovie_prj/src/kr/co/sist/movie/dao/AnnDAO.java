@@ -229,7 +229,7 @@ public class AnnDAO {
 	public void insert_join(JoinVO jv) throws SQLException {
 		
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt = null; 
 		try {
 		// 1.
 		// 2.
