@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -71,6 +72,8 @@ public class AnnDAO {
 
 		return con;
 	}// getConnection	 
+
+	
 	
 	/**
 	 * 메인화면 정보(이미지, 평점, 영화정보)
@@ -119,70 +122,201 @@ public class AnnDAO {
 	}//select_mainView
 	
 	
-	public boolean select_memberChk(LoginVO lv) throws SQLException{
-		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-	
-		try {
-		// 1.
-		// 2.
-			con=getConnection();
-		// 3.
-			String select_mem=" ";
-			pstmt=con.prepareStatement(select_mem);
-		// 4.
-			pstmt.setString(1, lv.getId()); 
-			pstmt.setString(2, lv.getPassword());
+	/**
+	    * 로그인시 가입되있는사람인지 아닌지 체크
+	    * 
+	    * @param lv
+	    * @return
+	    * @throws SQLException
+	    */
+	   public boolean select_memberChk(LoginVO lv) throws SQLException {
+	      boolean result = false;
 
-			pstmt.executeUpdate();
-		} finally {
-		// 5.
-			
-			if (pstmt != null) {
-				pstmt.close();
-			} // end if
+	      Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
 
-			if (con != null) {
-				con.close();
-			} // end if
-		}
-		return false;
-	}//select_memberChk
+	      try {
+	         // 1.
+	         // 2.
+	         con = getConnection();
+	         // 3.
+	         String user_id = lv.getId();
+	         String user_pw = lv.getPassword();
+
+	         String select_main = "select user_id,user_pw from ann_customer" + " where user_id='" + user_id
+	               + "' and user_pw='" + user_pw + "'";
+	         pstmt = con.prepareStatement(select_main);
+	         // 4.
+	         rs = pstmt.executeQuery();
+
+	         result = rs.next();
+
+	      } finally {
+	         // 5.
+	         if (rs != null) {
+	            rs.close();
+	         } // end if
+
+	         if (pstmt != null) {
+	            pstmt.close();
+	         } // end if
+
+	         if (con != null) {
+	            con.close();
+	         } // end if
+	      } // end catch
+
+	      return result;
+	   } // select_memberChk
+
+	   /**
+	    * 리뷰 전체 목록
+	    * 
+	    * @return
+	    * @throws SQLException
+	    */
+	   public List<AddReviewVO> select_totalReview() throws SQLException {
+	      List<AddReviewVO> list = new ArrayList<AddReviewVO>();
+
+	      Connection con = null;
+	      ResultSet rs = null;
+	      PreparedStatement pstmt = null;
+	      try {
+	         // 1.드라이버로딩
+	         // 2.커넥션 얻기
+	         con = getConnection();
+	         // 3.쿼리문 생성 객체 얻기
+	         String select_totalReview = "select movie_avg, review,user_id from ann_review";
+	         pstmt = con.prepareStatement(select_totalReview);
+	         // 4.쿼리문 실행 후 객체 얻기
+	         rs = pstmt.executeQuery();
+
+	         AddReviewVO arv = null;
+	         while (rs.next()) {
+	            arv = new AddReviewVO();
+	            // 생성자에 넣으면 무슨 값이 들어갔는지 알수 없다.
+	            // setter를 이용해서 어디에 무슨값이 들어갔는지 알수 있다
+	            // 실수를 줄일 수 있다.
+	            arv.setId(rs.getString("user_id"));
+	            arv.setMovieScore(rs.getString("movie_avg"));
+	            arv.setMovieReview(rs.getString("review"));
+
+	            list.add(arv);
+
+	         } // end while
+
+	      } finally {
+	         // 5
+	         if (pstmt != null) {
+	            pstmt.close();
+	         } // end if
+	         if (rs != null) {
+	            rs.close();
+	         } // end if
+	         if (con != null) {
+	            con.close();
+	         } // end if
+	      } // finally
+
+	      return list;
+	   }// select_totalReview
+
+	   /**
+	    * 예약 정보 출력용
+	    * 
+	    * @return
+	    * @throws SQLException
+	    */
+	   public ResInfoVO select_reserveInfo() throws SQLException {
+
+	      ResInfoVO riv = null;
+	      Connection con = null;
+	      ResultSet rs = null;
+	      PreparedStatement pstmt = null;
+	      try {
+	         // 1.드라이버로딩
+	         // 2.커넥션 얻기
+	         con = getConnection();
+	         // 3.쿼리문 생성 객체 얻기
+	         String select_reserveInfo = "select am.movie_title,am.movie_info,am.movie_opendate,ar.user_id,ar.res_code,ar.seat_quan,ans.seat_num,ar.movie_code"
+	               + " from ann_movie am,ann_reserve ar,ann_seat ans"
+	               + " where (am.movie_code=ar.movie_code) and (ar.res_code=ans.res_code)";
+	         pstmt = con.prepareStatement(select_reserveInfo);
+	         // 4.쿼리문 실행 후 객체 얻기
+	         rs = pstmt.executeQuery();
+
+	         while (rs.next()) {
+	            riv = new ResInfoVO();
+	            // 생성자에 넣으면 무슨 값이 들어갔는지 알수 없다.
+	            // setter를 이용해서 어디에 무슨값이 들어갔는지 알수 있다
+	            // 실수를 줄일 수 있다.
+	            // movie_title,am.movie_info,am.movie_opendate,ar.user_id,ar.res_code,ar.seat_quan,ans.seat_num,ar.movie_code
+	            riv.setMovieTitle(rs.getString("movie_title"));
+	            riv.setMovieInfo(rs.getString("movie_info"));
+	            riv.setOpenDate(rs.getString("movie_opendate"));
+	            riv.setId(rs.getString("user_id"));
+	            riv.setResCode(rs.getString("res_code"));
+	            riv.setSeatQuan(rs.getInt("seat_quan"));
+	            riv.setSeatNum(rs.getInt("seat_num"));
+	            riv.setMovie_code(rs.getString("movie_code"));
+
+	         } // end while
+
+	      } finally {
+	         // 5
+	         if (pstmt != null) {
+	            pstmt.close();
+	         } // end if
+	         if (rs != null) {
+	            rs.close();
+	         } // end if
+	         if (con != null) {
+	            con.close();
+	         } // end if
+	      } // finally
+	      return riv;
+	   }// select_resurveInfo
+
+	   /**
+	    * id 중복확인
+	    * 
+	    * @author user
+	    * @param id
+	    */
+	   public boolean select_overlapChk(String id) throws SQLException {
+	      boolean flag = false;
+
+	      Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      try {
+	         // 1.드라이버로딩
+	         // 2.커넥션 얻기
+	         con = getConnection();
+	         // 3.쿼리문 생성 객체 얻기
+	         String overlapChk = "select user_id from ann_customer where user_id='" + id + "'";
+	         pstmt = con.prepareStatement(overlapChk);
+	         // 4.쿼리문 실행 후 객체 얻기
+	         rs = pstmt.executeQuery();
+
+	         flag = rs.next();
+	      } finally {
+	         // 5
+	         if (pstmt != null) {
+	            pstmt.close();
+	         } // end if
+	         if (rs != null) {
+	            rs.close();
+	         } // end if
+	         if (con != null) {
+	            con.close();
+	         } // end if
+	      } // finally
+
+	      return flag;
+	   }// selectMenuList
 	
-	/**
-	 * @param id
-	 * @return
-	 */
-	public boolean select_overlapChk(String id){
-		return false;
-		
-	}//select_overlapChk
-	
-	/**
-	 * @return
-	 */
-	public List<AddReviewVO> select_totalReview(){
-		return null;
-		
-	}//select_totalReview
-	
-	/**
-	 * 예매정보 조회(고객용)
-	 * @return
-	 */
-	public ResInfoVO select_reserveInfo(){
-		return null;
-		
-	}//select_reserveInfo
-	
-	/**
-	 * 예매하기
-	 * @param rv
-	 */
-	public void insert_reserve(ReserveVO rv) {
-		
-	}//insert_reserve
 	
 	/**
 	 * DB에 후기 추가(평점, 리뷰, 아이디)
@@ -205,7 +339,7 @@ public class AnnDAO {
 				pstmt.setString(1, arv.getId());
 //				pstmt.setString(2,"ANN_000001");//무비코드 조인해야하나...
 				pstmt.setString(2, arv.getMovieReview());
-				pstmt.setInt(3, arv.getMovieScore());
+				pstmt.setString(3, arv.getMovieScore());
 
 				pstmt.executeUpdate();
 			} finally {
@@ -300,14 +434,12 @@ public class AnnDAO {
 	
 		try {
 			AnnDAO ado=new AnnDAO();
-			AddReviewVO arv=new AddReviewVO();
+			DelReviewVO drv=new DelReviewVO();
 			
-			arv.setId("쿨규임당");
+			drv.setId("cool");
+			drv.setMovieReview("우왕ㅋ굳");
 			
-			arv.setMovieReview("쿨하게 보겠어용");
-			arv.setMovieScore(3);
-			
-			ado.insert_review(arv);
+			ado.delete_review(drv);
 			
 			System.out.println("chkq");
 		} catch (SQLException e) {
