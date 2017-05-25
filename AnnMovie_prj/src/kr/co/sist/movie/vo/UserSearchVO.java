@@ -27,5 +27,4 @@ public class UserSearchVO {
 		this.email = email;
 	}
 	
-	
 }

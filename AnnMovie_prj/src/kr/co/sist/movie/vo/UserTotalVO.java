@@ -1,7 +1,7 @@
 package kr.co.sist.movie.vo;
 
-public class JoinVO {
-	private String id, passwd, name, ssn, phone, email, gender;
+public class UserTotalVO {
+	private String id,name,gender,phone,email;
 
 	public String getId() {
 		return id;
@@ -9,14 +9,6 @@ public class JoinVO {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getPasswd() {
-		return passwd;
-	}
-
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
 	}
 
 	public String getName() {
@@ -27,12 +19,12 @@ public class JoinVO {
 		this.name = name;
 	}
 
-	public String getSsn() {
-		return ssn;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setSsn(String ssn) {
-		this.ssn = ssn;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getPhone() {
@@ -51,14 +43,10 @@ public class JoinVO {
 		this.email = email;
 	}
 
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
+	@Override
+	public String toString() {
+		return "UserTotalVO [id=" + id + ", name=" + name + ", gender=" + gender + ", phone=" + phone + ", email="
+				+ email + "]";
 	}
 	
-	
-
 }

@@ -17,7 +17,7 @@ public class AddReviewVO {
 
 	public void setMovieReview(String movieReview) {
 		this.movieReview = movieReview;
-	}
+	};
 
 	public String getId() {
 		return id;
