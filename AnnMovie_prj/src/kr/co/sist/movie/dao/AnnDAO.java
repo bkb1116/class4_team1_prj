@@ -172,7 +172,6 @@ public class AnnDAO {
 
 	   /**
 	    * 리뷰 전체 목록
-	    * 
 	    * @return
 	    * @throws SQLException
 	    */

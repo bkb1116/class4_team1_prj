@@ -62,7 +62,15 @@ public class LoginView extends JFrame{
       
    }//loginform
    
-   public static void main(String[] args) {
+   
+   
+   public JTextField getJtf_id() {
+	return jtf_id;
+}
+
+
+
+public static void main(String[] args) {
       new LoginView();
    }//main
 

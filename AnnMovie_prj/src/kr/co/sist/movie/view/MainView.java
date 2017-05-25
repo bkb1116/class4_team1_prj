@@ -70,6 +70,13 @@ public class MainView extends JFrame{
       add(jsp_review);
       //이벤트 등록
       MainEvt me=new MainEvt(this);
+      jbt_login.addActionListener(me);
+      jbt_reserve.addActionListener(me);
+      jbt_join.addActionListener(me);
+      jbt_manager.addActionListener(me);
+      jbt_review.addActionListener(me);
+      Jbt_reserveChk.addActionListener(me);
+      
       //콤보박스에 1~5의숫자 넣어주기
       jcb_grade.addItem("평점주기");
       jcb_grade.addItem("1");
@@ -111,8 +118,70 @@ public class MainView extends JFrame{
       
    }//end MainPage
 
+   
 
-   public static void main(String[] args) {
+   public JComboBox<String> getJcb_grade() {
+	return jcb_grade;
+}
+
+
+
+public void setJcb_grade(JComboBox<String> jcb_grade) {
+	this.jcb_grade = jcb_grade;
+}
+
+
+
+public JTextField getJtf_Review() {
+	return jtf_Review;
+}
+
+
+
+public void setJtf_Review(JTextField jtf_Review) {
+	this.jtf_Review = jtf_Review;
+}
+
+
+
+public JButton getJbt_reserve() {
+	return jbt_reserve;
+}
+
+
+
+public JButton getJbt_review() {
+	return jbt_review;
+}
+
+
+
+public JButton getJbt_login() {
+	return jbt_login;
+}
+
+
+
+public JButton getJbt_reserveChk() {
+	return Jbt_reserveChk;
+}
+
+
+
+public JButton getJbt_join() {
+	return jbt_join;
+}
+
+
+
+public JButton getJbt_manager() {
+	return jbt_manager;
+}
+
+
+
+
+public static void main(String[] args) {
       new MainView();
    }//main
 
