@@ -264,8 +264,34 @@ public class AnnDAO {
 	/**
 	 * 후기삭제(리뷰, 아이디)
 	 * @param drv
+	 * @throws SQLException 
 	 */
-	public void delete_review(DelReviewVO drv) {
+	public void delete_review(DelReviewVO drv) throws SQLException {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null; 
+		try {
+		// 1.
+		// 2.
+			con=getConnection();
+		// 3.
+			String delete_review="delete from ann_review where (user_id=?) and (review=?)";
+			pstmt=con.prepareStatement(delete_review);
+		// 4.
+			pstmt.setString(1, drv.getId());
+			pstmt.setString(2, drv.getMovieReview());
+
+			pstmt.executeUpdate();
+		} finally {
+		// 5.
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+
+			if (con != null) {
+				con.close();
+			} // end if
+		}//end finally
 		
 	}//delete_review
 	
