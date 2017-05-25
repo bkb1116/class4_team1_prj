@@ -132,7 +132,7 @@ public class AnnDAO {
 			String select_mem=" ";
 			pstmt=con.prepareStatement(select_mem);
 		// 4.
-			pstmt.setString(1, lv.getId());
+			pstmt.setString(1, lv.getId()); 
 			pstmt.setString(2, lv.getPassword());
 
 			pstmt.executeUpdate();
