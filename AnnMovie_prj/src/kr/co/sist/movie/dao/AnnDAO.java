@@ -442,7 +442,7 @@ public class AnnDAO {
 			ado.delete_review(drv);
 			
 			System.out.println("chkq");
-		} catch (SQLException e) {
+		} catch (SQLException e) { 
 			e.printStackTrace();
 		}
 		
