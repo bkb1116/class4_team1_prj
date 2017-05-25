@@ -467,7 +467,7 @@ public class ManagerDAO {
 	}// insert_movieRegis
 
 	/**
-	 * 좌석 등록하는 method
+	 * 좌석 등록하는 method 
 	 * 
 	 * @param srv
 	 * @throws SQLException
