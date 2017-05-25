@@ -305,7 +305,7 @@ public class ManagerDAO {
 			rs.next();
 
 			// °ª ÇÒ´ç
-			result = rs.getString("res_code");
+			result = rs.getString("res_code"); 
 
 		} finally {
 			// 5
