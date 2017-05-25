@@ -19,7 +19,6 @@ import kr.co.sist.movie.vo.JoinVO;
 import kr.co.sist.movie.vo.LoginVO; 
 import kr.co.sist.movie.vo.MainVO;
 import kr.co.sist.movie.vo.ResInfoVO;
-import kr.co.sist.movie.vo.ReserveVO;
 
 public class AnnDAO {
 	private static AnnDAO a_dao;
