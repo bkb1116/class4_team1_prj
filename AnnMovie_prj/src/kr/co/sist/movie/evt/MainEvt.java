@@ -14,6 +14,7 @@ import kr.co.sist.movie.view.MainView;
 import kr.co.sist.movie.view.ManagerView;
 import kr.co.sist.movie.view.ResChkView;
 import kr.co.sist.movie.vo.AddReviewVO;
+import kr.co.sist.movie.vo.DelReviewVO;
 
 public class MainEvt extends WindowAdapter implements ActionListener, ItemListener {
 	
@@ -29,20 +30,21 @@ public class MainEvt extends WindowAdapter implements ActionListener, ItemListen
 	public MainEvt(MainView mv) {
 		this.mv=mv;
 		a_dao = AnnDAO.getInstance();
+		
 	}//MainEvt
 
 	/**
 	 * 로그인 클릭시 이벤트 처리
 	 */
 	public void loginGo(){
-		new LoginView();
+		new LoginView();//////////완료
 	}//loginGo
 	
 	/**
 	 * 예매확인 클릭시 이벤트 처리
 	 */
 	public void reserveChk(){
-		rcv=new ResChkView();
+		rcv=new ResChkView(); ////////////완료
 	}//reserveChk
 
 	/**
@@ -56,17 +58,22 @@ public class MainEvt extends WindowAdapter implements ActionListener, ItemListen
 	 * 후기남기기 클릭시 이벤트 처리
 	 * @throws SQLException 
 	 */
-	public void addReview() throws SQLException{
+	public void addReview() {
 		AddReviewVO arvo = new AddReviewVO();
 		
-//		id=lv.getJtf_id().getText();
-		//String menu= maf.getJtfMenu().getText();//메뉴명
+		String user_id=mv.getUser_id();
 		String movie_review=mv.getJtf_Review().getText();
 		String movie_score=(String) mv.getJcb_grade().getSelectedItem();
-		arvo.setId("kim");
+		
+		arvo.setId(user_id);//id 받아와야하는데??
 		arvo.setMovieReview(movie_review);
 		arvo.setMovieScore(movie_score);
-		a_dao.insert_review(arvo);
+		
+		try {
+			a_dao.insert_review(arvo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		System.out.println("찍힘");
 	}//addReview
@@ -75,6 +82,19 @@ public class MainEvt extends WindowAdapter implements ActionListener, ItemListen
 	 * 후기삭제 이벤트처리
 	 */
 	public void delReview(){
+		DelReviewVO drv=new DelReviewVO();
+		
+		String id=mv.getUser_id();
+		String movieReview = mv.getJtf_Review().getText(); 
+		
+		drv.setId(id);
+		drv.setMovieReview(movieReview);
+		
+		try {
+			a_dao.delete_review(drv);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}//delReview
 	
@@ -88,7 +108,6 @@ public class MainEvt extends WindowAdapter implements ActionListener, ItemListen
 	public void actionPerformed(ActionEvent e) {
 		
 		if( e.getSource()== mv.getJbt_join() ){
-			//회원가입버튼????
 			new JoinView();
 		}
 		
@@ -105,12 +124,7 @@ public class MainEvt extends WindowAdapter implements ActionListener, ItemListen
 		}
 		
 		if(e.getSource()==mv.getJbt_review()){
-			try {
-				addReview();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			addReview();
 		}
 		
 		if(e.getSource()==mv.getJbt_manager()){

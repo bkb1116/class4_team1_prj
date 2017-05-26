@@ -14,7 +14,8 @@ import javax.swing.JTextField;
 import kr.co.sist.movie.evt.MainEvt;
 
 public class MainView extends JFrame{
-
+	
+   private String user_id; 
    private JList<String> jl_review;
    private JComboBox<String> jcb_grade,jcb_peopleNum;
    private JLabel jlb_img,jlb_avg,jlb_peopleNum,jlb_avg2;
@@ -178,6 +179,18 @@ public JButton getJbt_manager() {
 	return jbt_manager;
 }
 
+
+
+
+public String getUser_id() {
+	return user_id;
+}
+
+
+
+public void setUser_id(String user_id) {
+	this.user_id = user_id;
+}
 
 
 

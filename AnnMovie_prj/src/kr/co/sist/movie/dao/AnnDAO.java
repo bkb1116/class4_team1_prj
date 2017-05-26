@@ -333,7 +333,7 @@ public class AnnDAO {
             con=getConnection();
          // 3.
             String insertOrdering="insert into ann_review(review_code, user_id, movie_code, notice, review, movie_avg, review_date )"
-                  +"values('REV_000016', ?, (select movie_code from ann_movie where movie_title='임금님의 사건수첩'), 'N', '쿨하게 보겠어용', 3, sysdate );";
+                  +"values(reviewcode, 'cool', (select movie_code from ann_movie where movie_title=?), 'N', '쿨한 규복이', 3, sysdate );";
             pstmt=con.prepareStatement(insertOrdering);
          // 4.
             pstmt.setString(1, arv.getId());
@@ -429,6 +429,8 @@ public class AnnDAO {
       
    }//delete_review
    
+//   public void insert_reserve
+//   
    public static void main(String[] args) {
          AnnDAO ad = new AnnDAO();
          LoginVO lv = new LoginVO();

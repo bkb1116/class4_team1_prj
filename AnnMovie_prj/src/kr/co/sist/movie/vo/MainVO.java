@@ -1,7 +1,7 @@
 package kr.co.sist.movie.vo;
 
 public class MainVO {
-	private String movieImg, movieInfo; 
+	private String movieImg, movieInfo, movieTitle; 
 	private int avgScore;
 	
 	public String getMovieImg() {
@@ -28,10 +28,16 @@ public class MainVO {
 		this.avgScore = avgScore;
 	}
 
+	public String getMovieTitle() {
+		return movieTitle;
+	}
+
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
+	}
+
 	@Override
 	public String toString() {
 		return "MainVO [movieImg=" + movieImg + ", movieInfo=" + movieInfo + ", avgScore=" + avgScore + "]";
 	}
-
-	
 }
