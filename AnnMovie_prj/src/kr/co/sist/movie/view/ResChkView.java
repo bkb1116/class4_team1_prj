@@ -80,7 +80,135 @@ public class ResChkView extends JFrame {
       
    }//infoForm
    
-   public static void main(String[] args) {
+   public JLabel getJl_wTime() {
+	return jl_wTime;
+}
+
+public void setJl_wTime(JLabel jl_wTime) {
+	this.jl_wTime = jl_wTime;
+}
+
+public JLabel getJl_wDate() {
+	return jl_wDate;
+}
+
+public void setJl_wDate(JLabel jl_wDate) {
+	this.jl_wDate = jl_wDate;
+}
+
+public JLabel getJl_resNum() {
+	return jl_resNum;
+}
+
+public void setJl_resNum(JLabel jl_resNum) {
+	this.jl_resNum = jl_resNum;
+}
+
+public JLabel getJl_seatNum() {
+	return jl_seatNum;
+}
+
+public void setJl_seatNum(JLabel jl_seatNum) {
+	this.jl_seatNum = jl_seatNum;
+}
+
+public JLabel getJl_resCnt() {
+	return jl_resCnt;
+}
+
+public void setJl_resCnt(JLabel jl_resCnt) {
+	this.jl_resCnt = jl_resCnt;
+}
+
+public JLabel getJl_mName() {
+	return jl_mName;
+}
+
+public void setJl_mName(JLabel jl_mName) {
+	this.jl_mName = jl_mName;
+}
+
+public JLabel getJl_wTime2() {
+	return jl_wTime2;
+}
+
+public void setJl_wTime2(JLabel jl_wTime2) {
+	this.jl_wTime2 = jl_wTime2;
+}
+
+public JLabel getJl_wDate2() {
+	return jl_wDate2;
+}
+
+public void setJl_wDate2(JLabel jl_wDate2) {
+	this.jl_wDate2 = jl_wDate2;
+}
+
+public JLabel getJl_resNum2() {
+	return jl_resNum2;
+}
+
+public void setJl_resNum2(JLabel jl_resNum2) {
+	this.jl_resNum2 = jl_resNum2;
+}
+
+public JLabel getJl_seatNum2() {
+	return jl_seatNum2;
+}
+
+public void setJl_seatNum2(JLabel jl_seatNum2) {
+	this.jl_seatNum2 = jl_seatNum2;
+}
+
+public JLabel getJl_resCnt2() {
+	return jl_resCnt2;
+}
+
+public void setJl_resCnt2(JLabel jl_resCnt2) {
+	this.jl_resCnt2 = jl_resCnt2;
+}
+
+public JLabel getJl_mName2() {
+	return jl_mName2;
+}
+
+public void setJl_mName2(JLabel jl_mName2) {
+	this.jl_mName2 = jl_mName2;
+}
+
+public JButton getJbt_cancel() {
+	return jbt_cancel;
+}
+
+public void setJbt_cancel(JButton jbt_cancel) {
+	this.jbt_cancel = jbt_cancel;
+}
+
+public JButton getJbt_print() {
+	return jbt_print;
+}
+
+public void setJbt_print(JButton jbt_print) {
+	this.jbt_print = jbt_print;
+}
+
+public JPanel getJp_resTitle() {
+	return jp_resTitle;
+}
+
+public void setJp_resTitle(JPanel jp_resTitle) {
+	this.jp_resTitle = jp_resTitle;
+}
+
+public JPanel getJp_resContent() {
+	return jp_resContent;
+}
+
+public void setJp_resContent(JPanel jp_resContent) {
+	this.jp_resContent = jp_resContent;
+}
+
+public static void main(String[] args) {
       new ResChkView();
    }//mian
 

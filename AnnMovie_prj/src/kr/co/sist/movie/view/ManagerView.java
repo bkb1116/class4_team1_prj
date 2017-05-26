@@ -1,13 +1,11 @@
 package kr.co.sist.movie.view;
 
 import java.awt.Font;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -18,12 +16,13 @@ import javax.swing.table.DefaultTableModel;
 
 import kr.co.sist.movie.evt.ManagerEvt;
 
+@SuppressWarnings("serial")
 public class ManagerView extends JFrame {
 	private JList<String>jl_seatBefore, jl_seatAfter, jl_memberInfo;
 	private JLabel jlb_title,jlb_notice, jlb_screen ;
 	private JTextArea jta_movieInfo;
 	private JTextField jtf_userId,jtf_movieName, jtf_date,jtf_notice,
-							jtf_userId2, jtf_choiceSeat;
+						   jtf_userId2, jtf_choiceSeat;
 	private JButton jbt_img, jbt_noticeRegis, jbt_insert, jbt_search, jbt_seatRegis;
 	private JScrollPane  jsp_movieInfo, jsp_memberInfo, jsp_seatBefore, jsp_seatAfter;
 	private JTabbedPane jtp;
@@ -76,8 +75,8 @@ public class ManagerView extends JFrame {
 		jbt_img = new JButton("영화이미지");// 이미지넣기
 		jta_movieInfo = new JTextArea();// 영화설명써서 넣어주기
 		jtf_notice = new JTextField("공지사항입력");
-		jtf_userId2 = new JTextField();//예매 할때 사용자 id받아오기
-		jtf_choiceSeat = new JTextField();//예매할때 선택한 좌석 받아오기
+		jtf_userId2 = new JTextField();//좌석등록 할때 사용자 id받아오기
+		jtf_choiceSeat = new JTextField();//좌석등록 할때 선택한 좌석 받아오기
 		jbt_noticeRegis = new JButton("등록");
 		jbt_insert = new JButton("영화추가");
 		jbt_search = new JButton("검색");
@@ -133,6 +132,9 @@ public class ManagerView extends JFrame {
 		jbt_noticeRegis.addActionListener(me);
 		jbt_insert.addActionListener(me);
 		jbt_img.addActionListener(me);
+		jbt_search.addActionListener(me);
+		jl_seatBefore.addListSelectionListener(me);
+		jl_seatAfter.addListSelectionListener(me);
 		
 
 		// 크기설정

@@ -13,12 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import javax.swing.JOptionPane;
-
 import kr.co.sist.movie.vo.MovieRegisVO;
 import kr.co.sist.movie.vo.SeatRegisVO;
 import kr.co.sist.movie.vo.UserResNotVO;
 import kr.co.sist.movie.vo.UserResYesVO;
-import kr.co.sist.movie.vo.UserSearchVO;
 import kr.co.sist.movie.vo.UserTotalVO;
 
 public class ManagerDAO {
@@ -94,9 +92,10 @@ public class ManagerDAO {
 			// 2.커넥션 얻기
 			con = getConnection();
 			// 3.쿼리문 생성 객체 얻기
-			String select_reserveYes = "select ar.user_id, ac.user_name,ans.seat_num1, ans.seat_num2 "
-					+ " from ann_reserve ar, ann_customer ac, ann_seat ans "
-					+ " where (ar.user_id=ac.user_id) and (ar.seat_code=ans.seat_code) and res_chk='Y'";
+			String select_reserveYes = "select ar.user_id, ac.user_name,ans.seat_num"
+					+ " from ann_reserve ar, ann_customer ac, ann_seat ans"
+					+ " where (ar.user_id=ac.user_id) and (ar.res_code=ans.res_code) and res_chk='Y'"
+					+ " order by seat_num asc";
 			pstmt = con.prepareStatement(select_reserveYes);
 			// 4.쿼리문 실행 후 객체 얻기
 			rs = pstmt.executeQuery();
@@ -109,8 +108,7 @@ public class ManagerDAO {
 				// 실수를 줄일 수 있다.
 				uryv.setId(rs.getString("user_id"));
 				uryv.setName(rs.getString("user_name"));
-				uryv.setSeatNum1(rs.getString("seat_num1"));
-				uryv.setSeatNum2(rs.getString("seat_num2"));
+				uryv.setSeatNum(rs.getString("seat_num"));
 
 				list.add(uryv);
 
@@ -305,7 +303,7 @@ public class ManagerDAO {
 			rs.next();
 
 			// 값 할당
-			result = rs.getString("res_code"); 
+			result = rs.getString("res_code");
 
 		} finally {
 			// 5
@@ -325,13 +323,13 @@ public class ManagerDAO {
 
 	/**
 	 * 입력된 사용자의 목록을 조회<br>
-	 * 이름,전화번호를 조회하여 UserSeachVO에 저장하고 List에 추가하여 반환하는 일을 한다.
+	 * 이름,전화번호를 조회하여 UserTotalVO에 저장하고 List에 추가하여 반환하는 일을 한다.
 	 * 
 	 * @return : List<UserSeachVO>
 	 * @throws SQLException
 	 */
-	public List<UserSearchVO> select_searchUser() throws SQLException {
-		List<UserSearchVO> list = new ArrayList<UserSearchVO>();
+	public List<UserTotalVO> select_searchUser(String id) throws SQLException {
+		List<UserTotalVO> list = new ArrayList<UserTotalVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -340,20 +338,28 @@ public class ManagerDAO {
 			// 2.커넥션 얻기
 			con = getConnection();
 			// 3.쿼리문 생성 객체 얻기
-			String userSearch = "select user_name,user_tell,user_email " + "from ann_customer";
+			String userSearch = "select user_id,user_name,user_gender,user_tell,user_email" + " from ann_customer"
+					+ " where user_id='" + id + "'";
 			pstmt = con.prepareStatement(userSearch);
 			// 4.쿼리문 실행 후 객체 얻기
 			rs = pstmt.executeQuery();
-			UserSearchVO usv = null;
+			UserTotalVO utv = null;
+
 			while (rs.next()) {
-				// 셋터로 받아오면 실수를 많이 줄일 수 있음.
-				// 이렇게 쓰는게 가독성이 좋음, 값의 꼬임을 많이 줄일 수 있음.
-				usv = new UserSearchVO();
-				usv.setName(rs.getString("user_name"));
-				usv.setPhone(rs.getString("user_tell"));
-				usv.setEmail(rs.getString("user_email"));
-				list.add(usv);
-			} // while
+				utv = new UserTotalVO();
+				// 생성자에 넣으면 무슨 값이 들어갔는지 알수 없다.
+				// setter를 이용해서 어디에 무슨값이 들어갔는지 알수 있다
+				// 실수를 줄일 수 있다.
+				// id,name,gender,phone,email;
+				utv.setId(rs.getString("user_id"));
+				utv.setName(rs.getString("user_name"));
+				utv.setGender(rs.getString("user_gender"));
+				utv.setPhone(rs.getString("user_tell"));
+				utv.setEmail(rs.getString("user_email"));
+
+				list.add(utv);
+			} // end while
+
 		} finally {
 			// 5
 			if (pstmt != null) {
@@ -450,8 +456,8 @@ public class ManagerDAO {
 			// 이렇게 쓰는게 가독성이 좋음, 값의 꼬임을 많이 줄일 수 있음.
 			pstmt.setString(1, mrv.getMovieName());//
 			pstmt.setString(2, mrv.getMovieInfo());//
-			pstmt.setString(3, mrv.getMovieDate());//
-			pstmt.setString(4, mrv.getMovieImg());//
+			pstmt.setString(3, mrv.getMovieImg());//
+			pstmt.setString(4, mrv.getMovieDate());//
 
 			pstmt.executeUpdate();
 		} finally {
@@ -467,7 +473,7 @@ public class ManagerDAO {
 	}// insert_movieRegis
 
 	/**
-	 * 좌석 등록하는 method 
+	 * 좌석 등록하는 method
 	 * 
 	 * @param srv
 	 * @throws SQLException
@@ -509,6 +515,7 @@ public class ManagerDAO {
 		}
 	}// insertOrder
 
+
 	////////////////////////////////////////////////////////
 	// 단위 테스트 //
 	///////////////////////////////////////////////////////
@@ -516,8 +523,8 @@ public class ManagerDAO {
 		ManagerDAO md = new ManagerDAO();
 		try {
 			// select_reserveNot method
-			// List<UserResNotVO> list = md.select_reserveNot();
-			// System.out.println(list);
+			List<UserTotalVO> list = md.select_searchUser("kim");
+			System.out.println(list);
 
 			// select_seatNum method
 			// String seat_num = md.select_seatNum("SEAT_00003");
@@ -536,10 +543,10 @@ public class ManagerDAO {
 			// System.out.println(rs);
 
 			// insert_seat method
-			SeatRegisVO srv = new SeatRegisVO();
-			srv.setId("cool");
-			srv.setSeatNum(22);
-			md.insert_seat(srv);
+			// SeatRegisVO srv = new SeatRegisVO();
+			// srv.setId("cool");
+			// srv.setSeatNum(22);
+			// md.insert_seat(srv);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

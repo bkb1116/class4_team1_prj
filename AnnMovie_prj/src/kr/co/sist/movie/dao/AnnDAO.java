@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import kr.co.sist.movie.view.MainView;
 import kr.co.sist.movie.vo.AddReviewVO;
 import kr.co.sist.movie.vo.DelReviewVO;
 import kr.co.sist.movie.vo.JoinVO;
@@ -23,8 +24,10 @@ import kr.co.sist.movie.vo.ReserveVO;
 
 public class AnnDAO {
    private static AnnDAO a_dao;
+   private MainView mv;
    
    public AnnDAO() {
+	   
    }//AnnDAO
 
    public static AnnDAO getInstance(){
@@ -47,8 +50,7 @@ public class AnnDAO {
       Properties prop = new Properties(); 
   
       try { 
-         File file = new File("C:/dev/AnnMovie_prj/class4_team1_prj/AnnMovie_prj/src/kr/co/sist/movie/dao/AnnMovie_db.properties"); 
-
+         File file = new File("C:/Users/sist/Desktop/11111jdbc_prj/AnnMovie_prj/src/kr/co/sist/movie/dao/AnnMovie_db.properties");
          if (file.exists()) {
             prop.load(new FileInputStream(file)); 
             String driver = prop.getProperty("driver");
@@ -93,14 +95,16 @@ public class AnnDAO {
          // 2.
          con = getConnection();
          // 3.
-         String select_main = "select * from ann_movie where movie_code='ANN_000001'";
+         String select_main = "select movie_img, movie_code, movie_score, movie_title"
+         		+ " from ann_movie order by movie_date desc";
          pstmt = con.prepareStatement(select_main);
          // 4.
          rs = pstmt.executeQuery();
 
          rs.next();
+         mvo.setMovieTitle(rs.getString("movie_title"));
          mvo.setMovieImg(rs.getString("movie_Img"));
-         mvo.setMovieInfo(rs.getString("movie_Info"));
+         mvo.setMovieCode(rs.getString("movie_code"));
          mvo.setAvgScore(rs.getInt("movie_score"));
          
       } finally {
@@ -323,37 +327,37 @@ public class AnnDAO {
     * @param arv
     * @throws SQLException 
     */
-   public void insert_review(AddReviewVO arv) throws SQLException {
-      
-         Connection con = null;
-         PreparedStatement pstmt = null;
-         try {
-         // 1.
-         // 2.
-            con=getConnection();
-         // 3.
-            String insertOrdering="insert into ann_review(review_code, user_id, movie_code, notice, review, movie_avg, review_date )"
-                  +"values(reviewcode, 'cool', (select movie_code from ann_movie where movie_title=?), 'N', '쿨한 규복이', 3, sysdate );";
-            pstmt=con.prepareStatement(insertOrdering);
-         // 4.
-            pstmt.setString(1, arv.getId());
-//            pstmt.setString(2,"ANN_000001");//무비코드 조인해야하나...
-            pstmt.setString(2, arv.getMovieReview());
-            pstmt.setString(3, arv.getMovieScore());
+      public void insert_review(AddReviewVO arv) throws SQLException {
+    	  
+    	  
+          Connection con = null;
+          PreparedStatement pstmt = null;
+          try {
+          // 1.
+          // 2.
+             con=getConnection();
+          // 3.
+             String insertOrdering="insert into ann_review(review_code, user_id, movie_code, notice, review, movie_avg, review_date ) "
+                   + "values(reviewcode, ?, 'ANN_000001', 'N', ?, ?, sysdate )";
+             pstmt=con.prepareStatement(insertOrdering);
+          // 4.
+             
+             pstmt.setString(1, arv.getId());
+             pstmt.setString(2, arv.getMovieReview());
+             pstmt.setString(3, arv.getMovieScore());
 
-            pstmt.executeUpdate();
-         } finally {
-         // 5.
-            if (pstmt != null) {
-               pstmt.close();
-            } // end if
+             pstmt.executeUpdate();
+          } finally {
+          // 5.
+             if (pstmt != null) {
+                pstmt.close();
+             } // end if
 
-            if (con != null) {
-               con.close();
-            } // end if
-         }//end finally
-         
-   }//insert_review
+             if (con != null) {
+                con.close();
+             } // end if
+          }//end finally
+    }//insert_review
    
    /**
     * 회원가입(id, 이름, 비밀번호, 주민번호, 전화번호, 이메일, 성별, 가입일)
@@ -429,8 +433,38 @@ public class AnnDAO {
       
    }//delete_review
    
-//   public void insert_reserve
-//   
+   public void insert_reserve(ReserveVO rv) throws SQLException{
+	   	
+	   	Connection con = null;
+	    PreparedStatement pstmt = null; 
+	    try {
+	      // 1.
+	      // 2.
+	         con=getConnection();
+	      // 3.
+	         String insert_join="insert into ann_reserve "
+	         		+ " values(seatcode, ?, ?, ?, sysdate, 'N');";
+	         pstmt=con.prepareStatement(insert_join);
+	      // 4.
+//	         pstmt.setString(1, mv.getUser_id());//아이디
+	         pstmt.setString(2, rv.getMovieCode());//영화코드
+	         pstmt.setString(3, rv.getSeatQuan());//인원수
+	
+	         pstmt.executeUpdate();
+	      } finally {
+	      // 5.
+	         if (pstmt != null) {
+	            pstmt.close();
+	         } // end if
+	
+	         if (con != null) {
+	            con.close();
+	         } // end if
+	      }//end finally
+	   
+	   
+   }//insert_reserve
+   
    public static void main(String[] args) {
          AnnDAO ad = new AnnDAO();
          LoginVO lv = new LoginVO();
@@ -438,7 +472,7 @@ public class AnnDAO {
          lv.setPassword("1234111");
 
          try {
-            System.out.println(ad.select_memberChk(lv));
+        	 System.out.println(ad.select_mainView());
          } catch (SQLException e) {
             e.printStackTrace();
          }

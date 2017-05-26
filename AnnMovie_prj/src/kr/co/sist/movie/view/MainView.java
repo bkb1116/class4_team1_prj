@@ -2,6 +2,7 @@ package kr.co.sist.movie.view;
 
 import java.awt.Font;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -23,6 +24,8 @@ public class MainView extends JFrame{
    private JButton jbt_reserve,jbt_review,jbt_login,Jbt_reserveChk,jbt_join,jbt_manager;
    private JScrollPane jsp_review;
    private Font font;
+   private DefaultListModel<String> dlm_reviewAll;
+   
    public MainView(){
       super("영화예매 페이지");
       //라벨 
@@ -77,7 +80,11 @@ public class MainView extends JFrame{
       jbt_manager.addActionListener(me);
       jbt_review.addActionListener(me);
       Jbt_reserveChk.addActionListener(me);
+      jcb_peopleNum.addItemListener(me);
       
+      //전체 후기 리스트
+      dlm_reviewAll=new DefaultListModel<String>();
+      jl_review = new JList<String>(dlm_reviewAll);
       //콤보박스에 1~5의숫자 넣어주기
       jcb_grade.addItem("평점주기");
       jcb_grade.addItem("1");
@@ -190,6 +197,68 @@ public String getUser_id() {
 
 public void setUser_id(String user_id) {
 	this.user_id = user_id;
+}
+
+
+
+
+public JComboBox<String> getJcb_peopleNum() {
+	return jcb_peopleNum;
+}
+
+
+
+public void setJcb_peopleNum(JComboBox<String> jcb_peopleNum) {
+	this.jcb_peopleNum = jcb_peopleNum;
+}
+
+
+
+public JLabel getJlb_img() {
+	return jlb_img;
+}
+
+
+
+public void setJlb_img(JLabel jlb_img) {
+	this.jlb_img = jlb_img;
+}
+
+
+
+
+public JLabel getJlb_avg2() {
+	return jlb_avg2;
+}
+
+
+
+public void setJlb_avg2(JLabel jlb_avg2) {
+	this.jlb_avg2 = jlb_avg2;
+}
+
+
+
+public JLabel getJlb_avg() {
+	return jlb_avg;
+}
+
+
+
+public void setJlb_avg(JLabel jlb_avg) {
+	this.jlb_avg = jlb_avg;
+}
+
+
+
+public DefaultListModel<String> getDlm_reviewAll() {
+	return dlm_reviewAll;
+}
+
+
+
+public void setDlm_reviewAll(DefaultListModel<String> dlm_reviewAll) {
+	this.dlm_reviewAll = dlm_reviewAll;
 }
 
 

@@ -1,8 +1,8 @@
 package kr.co.sist.movie.vo;
 
 public class MainVO {
-	private String movieImg, movieInfo, movieTitle; 
-	private int avgScore;
+	private String movieImg, movieCode, movieTitle; 
+	private int avgScore, peopleNum;
 	
 	public String getMovieImg() {
 		return movieImg;
@@ -12,12 +12,12 @@ public class MainVO {
 		this.movieImg = movieImg;
 	}
 
-	public String getMovieInfo() {
-		return movieInfo;
+	public String getMovieCode() {
+		return movieCode;
 	}
 
-	public void setMovieInfo(String movieInfo) {
-		this.movieInfo = movieInfo;
+	public void setMovieCode(String movieCode) {
+		this.movieCode = movieCode;
 	}
 
 	public int getAvgScore() {
@@ -36,8 +36,18 @@ public class MainVO {
 		this.movieTitle = movieTitle;
 	}
 
+	public int getPeopleNum() {
+		return peopleNum;
+	}
+
+	public void setPeopleNum(int peopleNum) {
+		this.peopleNum = peopleNum;
+	}
+
 	@Override
 	public String toString() {
-		return "MainVO [movieImg=" + movieImg + ", movieInfo=" + movieInfo + ", avgScore=" + avgScore + "]";
+		return "MainVO [movieImg=" + movieImg + ", movieCode=" + movieCode + ", movieTitle=" + movieTitle
+				+ ", avgScore=" + avgScore + ", peopleNum=" + peopleNum + "]";
 	}
+
 }
