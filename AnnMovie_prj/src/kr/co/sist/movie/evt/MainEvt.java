@@ -33,7 +33,7 @@ public class MainEvt extends WindowAdapter implements ActionListener, ItemListen
 		
 	}//MainEvt
 
-	/**
+	/** 
 	 * 로그인 클릭시 이벤트 처리
 	 */
 	public void loginGo(){
